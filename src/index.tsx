@@ -1,17 +1,61 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export type address = {
+  name: string;
+  email: string;
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const App: React.FC = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [addresses, setAddresses] = useState<address[]>([]);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const newAddress: address = {
+      name,
+      email,
+    };
+    setAddresses([...addresses, newAddress]);
+    setName("");
+    setEmail("");
+  };
+
+  return (
+    <div>
+      <h1>Nano CRM</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name : </label>
+        <input
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <br />
+        <label htmlFor="email">E-mail : </label>
+        <input
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+        <br />
+        <button type="submit">Add</button>
+      </form>
+      <hr />
+      {addresses.length > 0 && (
+        <ul>
+          {addresses.map((element) => (
+            <li key={element.email}>
+              {element.name} : {element.email}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
