@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { address } from "./types";
 
 import AddressForm from "./components/AddressForm";
+import Display from "./components/Display";
 
 const App: React.FC = () => {
   const [addresses, setAddresses] = useState<address[]>([]);
@@ -15,15 +16,7 @@ const App: React.FC = () => {
       <h1>Nano CRM</h1>
       <AddressForm addAddress={addAddress} />
       <hr />
-      {addresses.length > 0 && (
-        <ul>
-          {addresses.map((element: address) => (
-            <li key={element.email}>
-              {element.name} : {element.email}
-            </li>
-          ))}
-        </ul>
-      )}
+      <Display addressArray={addresses} />
     </div>
   );
 };
