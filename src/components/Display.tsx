@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { address } from "../types";
 
 export interface DisplayProps {
@@ -7,7 +7,7 @@ export interface DisplayProps {
 
 const Display: React.FC<DisplayProps> = ({ addressArray }) => {
   return (
-    <Fragment>
+    <div className="display-addresses">
       {addressArray.length > 0 && (
         <ul>
           {addressArray.map((element: address) => (
@@ -17,7 +17,7 @@ const Display: React.FC<DisplayProps> = ({ addressArray }) => {
           ))}
         </ul>
       )}
-    </Fragment>
+    </div>
   );
 };
 

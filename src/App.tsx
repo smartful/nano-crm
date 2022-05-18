@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { address } from "./types";
 
 import AddressForm from "./components/AddressForm";
@@ -17,6 +20,7 @@ const App: React.FC = () => {
       <AddressForm addAddress={addAddress} />
       <hr />
       <Display addressArray={addresses} />
+      <ToastContainer />
     </div>
   );
 };

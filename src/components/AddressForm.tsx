@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { address } from "../types";
 
 export interface AddressFormProps {
@@ -11,6 +12,17 @@ const AddressForm: React.FC<AddressFormProps> = ({ addAddress }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (name === "" || email === "") {
+      toast.warn("Empty field !", {
+        position: toast.POSITION.TOP_RIGHT,
+        theme: "dark",
+        autoClose: 3000,
+      });
+
+      return;
+    }
+
     const newAddress: address = {
       name,
       email,
